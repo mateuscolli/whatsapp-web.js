@@ -213,8 +213,6 @@ client.on('message', async msg => {
         let button = new Buttons(
             'Button body',
             [
-                { body: 'Link', url: 'https://google.com' },
-                { body: 'Call', number: '5515998519986' },
                 { body: 'Some text' },
                 { body: 'Try clicking me (id:test)', id: 'test'},
             ],
@@ -240,7 +238,7 @@ client.on('message', async msg => {
         if (msg.hasQuotedMsg) {
             const quotedMsg = await msg.getQuotedMessage();
             if (quotedMsg.fromMe) {
-                quotedMsg.edit(msg.body.replace('!edit', ''));
+                quotedMsg.edit('testado');
             } else {
                 msg.reply('I can only edit my own messages');
             }
