@@ -156,10 +156,9 @@ class Contact extends Base {
 
         await this.client.pupPage.evaluate(async (contactId) => {
             const contact = window.Store.Contact.get(contactId);
-            await window.Store.BlockContact.blockContact({contact});
+            await window.Store.BlockContact.blockContact(contact);
         }, this.id._serialized);
 
-        this.isBlocked = true;
         return true;
     }
 
@@ -175,7 +174,6 @@ class Contact extends Base {
             await window.Store.BlockContact.unblockContact(contact);
         }, this.id._serialized);
 
-        this.isBlocked = false;
         return true;
     }
 

@@ -146,16 +146,6 @@ client.on('message', async msg => {
             const attachmentData = await quotedMsg.downloadMedia();
             client.sendMessage(msg.from, attachmentData, { caption: 'Here\'s your requested media.' });
         }
-        if (quotedMsg.hasMedia && quotedMsg.type === 'audio') {
-            const audio = await quotedMsg.downloadMedia();
-            await client.sendMessage(msg.from, audio, { sendAudioAsVoice: true });
-        }
-    } else if (msg.body === '!isviewonce' && msg.hasQuotedMsg) {
-        const quotedMsg = await msg.getQuotedMessage();
-        if (quotedMsg.hasMedia) {
-            const media = await quotedMsg.downloadMedia();
-            await client.sendMessage(msg.from, media, { isViewOnce: true });
-        }
     } else if (msg.body === '!location') {
         msg.reply(new Location(37.422, -122.084, 'Googleplex\nGoogle Headquarters'));
     } else if (msg.location) {
@@ -340,28 +330,28 @@ client.on('contact_changed', async (message, oldId, newId, isContact) => {
         `Their new phone number is ${newId.slice(0, -5)}.\n`);
 
     /**
-     * Information about the @param {message}:
+     * Information about the {@name message}:
      * 
      * 1. If a notification was emitted due to a group participant changing their phone number:
-     * @param {message.author} is a participant's id before the change.
-     * @param {message.recipients[0]} is a participant's id after the change (a new one).
+     * {@name message.author} is a participant's id before the change.
+     * {@name message.recipients[0]} is a participant's id after the change (a new one).
      * 
      * 1.1 If the contact who changed their number WAS in the current user's contact list at the time of the change:
-     * @param {message.to} is a group chat id the event was emitted in.
-     * @param {message.from} is a current user's id that got an notification message in the group.
-     * Also the @param {message.fromMe} is TRUE.
+     * {@name message.to} is a group chat id the event was emitted in.
+     * {@name message.from} is a current user's id that got an notification message in the group.
+     * Also the {@name message.fromMe} is TRUE.
      * 
      * 1.2 Otherwise:
-     * @param {message.from} is a group chat id the event was emitted in.
-     * @param {message.to} is @type {undefined}.
-     * Also @param {message.fromMe} is FALSE.
+     * {@name message.from} is a group chat id the event was emitted in.
+     * {@name message.to} is @type {undefined}.
+     * Also {@name message.fromMe} is FALSE.
      * 
      * 2. If a notification was emitted due to a contact changing their phone number:
-     * @param {message.templateParams} is an array of two user's ids:
+     * {@name message.templateParams} is an array of two user's ids:
      * the old (before the change) and a new one, stored in alphabetical order.
-     * @param {message.from} is a current user's id that has a chat with a user,
+     * {@name message.from} is a current user's id that has a chat with a user,
      * whos phone number was changed.
-     * @param {message.to} is a user's id (after the change), the current user has a chat with.
+     * {@name message.to} is a user's id (after the change), the current user has a chat with.
      */
 });
 
